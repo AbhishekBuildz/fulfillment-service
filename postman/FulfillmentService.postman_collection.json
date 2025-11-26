@@ -1,0 +1,650 @@
+{
+	"info": {
+		"_postman_id": "2be64221-075a-4439-a007-ed82b1c7cfe3",
+		"name": "Fulfillment Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29257434"
+	},
+	"item": [
+		{
+			"name": "Inventory",
+			"item": [
+				{
+					"name": "Product",
+					"item": [
+						{
+							"name": "Index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/v1/admin/products",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"products"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get All",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/admin/products",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"admin",
+												"products"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 25 Nov 2025 17:52:50 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": 1,\n        \"sku\": \"PARLE-G-70G\",\n        \"name\": \"Parle-G Biscuit 70g\",\n        \"description\": \"Classic glucose biscuit from Parle\",\n        \"price\": 10\n    },\n    {\n        \"id\": 2,\n        \"sku\": \"DAIRYMILK-45G\",\n        \"name\": \"Cadbury Dairy Milk 45g\",\n        \"description\": \"Milk chocolate bar\",\n        \"price\": 45\n    },\n    {\n        \"id\": 3,\n        \"sku\": \"MAGGIE-70G\",\n        \"name\": \"Maggie Masala Noodles 70g\",\n        \"description\": \"Instant noodles pack\",\n        \"price\": 15\n    },\n    {\n        \"id\": 4,\n        \"sku\": \"AMUL-MILK-1L\",\n        \"name\": \"Amul Taaza Milk 1L\",\n        \"description\": \"Fresh toned milk\",\n        \"price\": 65\n    },\n    {\n        \"id\": 5,\n        \"sku\": \"DETTOL-100ML\",\n        \"name\": \"Dettol Antiseptic 100ml\",\n        \"description\": \"Multipurpose disinfectant liquid\",\n        \"price\": 35\n    },\n    {\n        \"id\": 7,\n        \"sku\": \"TATA-SALT-1KG\",\n        \"name\": \"Tata Iodized Salt\",\n        \"description\": \"Refined iodized salt, 1kg packet.\",\n        \"price\": 22\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Show Product",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/v1/admin/products/:id",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"products",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Show",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/admin/products/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"admin",
+												"products",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 25 Nov 2025 17:53:42 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 1,\n    \"sku\": \"PARLE-G-70G\",\n    \"name\": \"Parle-G Biscuit 70g\",\n    \"description\": \"Classic glucose biscuit from Parle\",\n    \"price\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "Create Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"sku\": \"TATA-SALT-1KG\",\r\n  \"name\": \"Tata Iodized Salt\",\r\n  \"description\": \"Refined iodized salt, 1kg packet.\",\r\n  \"price\": 22.00\r\n}\r\n\r\n// {\r\n//   \"sku\": \"REDLABEL-250\",\r\n//   \"name\": \"Brooke Bond Red Label Tea\",\r\n//   \"description\": \"Strong tea granules, 250g pack.\",\r\n//   \"price\": 145.00\r\n// }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/v1/admin/products",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"products"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Create",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"sku\": \"TATA-SALT-1KG\",\r\n  \"name\": \"Tata Iodized Salt\",\r\n  \"description\": \"Refined iodized salt, 1kg packet.\",\r\n  \"price\": 22.00\r\n}\r\n\r\n// {\r\n//   \"sku\": \"REDLABEL-250\",\r\n//   \"name\": \"Brooke Bond Red Label Tea\",\r\n//   \"description\": \"Strong tea granules, 250g pack.\",\r\n//   \"price\": 145.00\r\n// }\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/admin/products",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"admin",
+												"products"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 25 Nov 2025 17:52:42 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 7,\n    \"sku\": \"TATA-SALT-1KG\",\n    \"name\": \"Tata Iodized Salt\",\n    \"description\": \"Refined iodized salt, 1kg packet.\",\n    \"price\": 22\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Warehouse",
+					"item": [
+						{
+							"name": "Index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/v1/admin/warehouses",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"warehouses"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Index",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/admin/warehouses",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"admin",
+												"warehouses"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 25 Nov 2025 17:56:51 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Main Warehouse\",\n        \"address\": \"Delhi NCR\",\n        \"latitude\": 28.6139,\n        \"longitude\": 77.209,\n        \"type\": \"PRIMARY\"\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Show",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/v1/admin/warehouses/:id",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"warehouses",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Show",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/admin/warehouses/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"admin",
+												"warehouses",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 25 Nov 2025 17:55:21 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 1,\n    \"name\": \"Main Warehouse\",\n    \"address\": \"Delhi NCR\",\n    \"latitude\": 28.6139,\n    \"longitude\": 77.209,\n    \"type\": \"PRIMARY\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Lot",
+					"item": [
+						{
+							"name": "Index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/v1/admin/warehouses/:warehouse_id/lots",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"warehouses",
+										":warehouse_id",
+										"lots"
+									],
+									"variable": [
+										{
+											"key": "warehouse_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Index",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/v1/admin/warehouses/:warehouse_id/lots",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"admin",
+												"warehouses",
+												":warehouse_id",
+												"lots"
+											],
+											"variable": [
+												{
+													"key": "warehouse_id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 25 Nov 2025 18:00:10 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": 1,\n        \"productId\": 1,\n        \"warehouseId\": 1,\n        \"availableQuantity\": 500,\n        \"reservedQuantity\": 0,\n        \"expiryDate\": \"2025-05-20\"\n    },\n    {\n        \"id\": 2,\n        \"productId\": 1,\n        \"warehouseId\": 1,\n        \"availableQuantity\": 200,\n        \"reservedQuantity\": 0,\n        \"expiryDate\": \"2025-03-15\"\n    },\n    {\n        \"id\": 3,\n        \"productId\": 2,\n        \"warehouseId\": 1,\n        \"availableQuantity\": 300,\n        \"reservedQuantity\": 0,\n        \"expiryDate\": \"2025-08-30\"\n    },\n    {\n        \"id\": 4,\n        \"productId\": 2,\n        \"warehouseId\": 1,\n        \"availableQuantity\": 150,\n        \"reservedQuantity\": 0,\n        \"expiryDate\": \"2025-07-10\"\n    },\n    {\n        \"id\": 5,\n        \"productId\": 3,\n        \"warehouseId\": 1,\n        \"availableQuantity\": 400,\n        \"reservedQuantity\": 0,\n        \"expiryDate\": \"2025-02-12\"\n    },\n    {\n        \"id\": 6,\n        \"productId\": 4,\n        \"warehouseId\": 1,\n        \"availableQuantity\": 100,\n        \"reservedQuantity\": 0,\n        \"expiryDate\": \"2024-12-05\"\n    },\n    {\n        \"id\": 7,\n        \"productId\": 4,\n        \"warehouseId\": 1,\n        \"availableQuantity\": 70,\n        \"reservedQuantity\": 0,\n        \"expiryDate\": \"2024-12-02\"\n    },\n    {\n        \"id\": 8,\n        \"productId\": 5,\n        \"warehouseId\": 1,\n        \"availableQuantity\": 250,\n        \"reservedQuantity\": 0,\n        \"expiryDate\": \"2026-01-01\"\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productId\": 1,\r\n    \"quantity\": 1000,\r\n    \"expiryDate\": \"2026-06-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/v1/admin/warehouses/:warehouse_id/lots",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"warehouses",
+										":warehouse_id",
+										"lots"
+									],
+									"variable": [
+										{
+											"key": "warehouse_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Create",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"productId\": 5,\r\n    \"warehouseId\": 1,\r\n    \"quantity\": 250,\r\n    \"expiryDate\": \"2026-04-01\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/v1/admin/warehouses/:warehouse_id/lots",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"admin",
+												"warehouses",
+												":warehouse_id",
+												"lots"
+											],
+											"variable": [
+												{
+													"key": "warehouse_id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 25 Nov 2025 18:04:57 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 9,\n    \"productId\": 5,\n    \"warehouseId\": 1,\n    \"availableQuantity\": 250,\n    \"reservedQuantity\": 0,\n    \"expiryDate\": \"2026-04-01\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Place Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": 1, // user should be captured using JWT, but for simplicity we have only one user in service and we are sending in request.\r\n  \"items\": [\r\n    {\r\n        \"productId\": 1,\r\n        \"quantity\": 100\r\n    },\r\n    {\r\n        \"productId\": 5,\r\n        \"quantity\": 100\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/user/orders",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

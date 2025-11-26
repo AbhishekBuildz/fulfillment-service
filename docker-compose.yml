@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: fulfillment_postgres
+    environment:
+      POSTGRES_DB: fulfillment
+      POSTGRES_USER: fulfillment_user
+      POSTGRES_PASSWORD: postgres123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "fulfillment_user", "-d", "fulfillment"]
+      interval: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: fulfillment_app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/fulfillment
+      SPRING_DATASOURCE_USERNAME: fulfillment_user
+      SPRING_DATASOURCE_PASSWORD: postgres123
+    ports:
+      - "8080:8080"
+    restart: always
+
+volumes:
+  pgdata:
