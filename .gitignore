@@ -1,7 +1,18 @@
-/target
-/.idea
-/.mvn
+# Build output
+target/
+
+# IntelliJ project files
+.idea/
 *.iml
+
+# Logs
 *.log
+
+# Compiled class files
 *.class
+
+# macOS Finder metadata
 .DS_Store
+
+# Maven auto-generated (but KEEP wrapper)
+# Ignore everything inside target, but DO NOT ignore .mvn
