@@ -63,8 +63,6 @@ public class InventoryService {
                 .toList();
     }
 
-    // ---------- Core FEFO reservation logic used by OrderService ----------
-
     @Transactional
     public Map<Long, Long> reserveProductFromLots(Long warehouseId, OrderItem orderItem) {
         Map<Long, Long> usedLots = new LinkedHashMap<>();

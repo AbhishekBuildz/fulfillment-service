@@ -5,8 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.LocalDateTime;
 
@@ -21,7 +23,6 @@ public class GlobalExceptionHandler {
         );
     }
 
-    // 1. Specific exception for insufficient inventory
     @ExceptionHandler(InsufficientInventoryException.class)
     public ResponseEntity<ApiError> handleInsufficientInventory(
             InsufficientInventoryException exception) {
@@ -31,7 +32,6 @@ public class GlobalExceptionHandler {
                 .body(build(HttpStatus.UNPROCESSABLE_ENTITY, exception.getMessage()));
     }
 
-    // 2. Optimistic locking (concurrency conflict)
     @ExceptionHandler(OptimisticLockException.class)
     public ResponseEntity<ApiError> handleOptimisticLockException(
             OptimisticLockException exception) {
@@ -42,7 +42,6 @@ public class GlobalExceptionHandler {
                         "Inventory was modified by another request. Please retry."));
     }
 
-    // 3. Validation exceptions
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError> handleValidationException(
             MethodArgumentNotValidException exception) {
@@ -58,7 +57,6 @@ public class GlobalExceptionHandler {
                 .body(build(HttpStatus.BAD_REQUEST, message));
     }
 
-    // 4. Illegal arguments (bad request)
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ApiError> handleIllegalArgumentException(
             IllegalArgumentException exception) {
@@ -68,7 +66,6 @@ public class GlobalExceptionHandler {
                 .body(build(HttpStatus.BAD_REQUEST, exception.getMessage()));
     }
 
-    // 5. Fallback for unexpected exceptions
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> handleGenericException(Exception exception) {
 
@@ -88,6 +85,28 @@ public class GlobalExceptionHandler {
             message = rootCause.getMessage();
         }
 
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(build(HttpStatus.BAD_REQUEST, message));
+    }
+
+    @ExceptionHandler(MissingPathVariableException.class)
+    public ResponseEntity<ApiError> handleMissingPathVar(MissingPathVariableException ex) {
+        return ResponseEntity
+                .badRequest()
+                .body(build(HttpStatus.BAD_REQUEST, "Required path variable is missing: " + ex.getVariableName()));
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public ResponseEntity<ApiError> handleNumberFormat(NumberFormatException ex) {
+        return ResponseEntity
+                .badRequest()
+                .body(build(HttpStatus.BAD_REQUEST, "Path variable must be a valid number"));
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ApiError> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        String message = "Invalid or missing path variable: " + ex.getName();
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(build(HttpStatus.BAD_REQUEST, message));

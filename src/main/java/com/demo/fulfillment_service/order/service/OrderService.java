@@ -33,7 +33,28 @@ public class OrderService {
     private final InventoryService inventoryService;
     private final OrderMapper orderMapper;
 
-    // ---------- create (user) ----------
+    /**
+     * Places a new order using FEFO allocation.
+     *
+     * Flow:
+     *  - When an order is placed, required inventory quantity is RESERVED and the
+     *    available quantity is reduced immediately to prevent overselling.
+     *
+     *  - This reserved quantity is NOT considered final yet. The final stock movement
+     *    will depend on the payment result:
+     *
+     *      1) If payment is CONFIRMED:
+     *         - The reserved quantity will be permanently committed
+     *           (converted to actual deduction).
+     *
+     *      2) If payment FAILS or EXPIRES:
+     *         - The reserved quantity will be released back to inventory and
+     *           the available quantity restored.
+     *
+     * This ensures safe inventory allocation without committing stock before
+     * payment confirmation while still blocking other orders from taking the same units.
+     */
+
     @Transactional
     public UserOrderResponseDTO create(UserOrderRequestDTO userOrderRequestDTO) {
 
